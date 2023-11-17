@@ -81,8 +81,6 @@ display: none;
 display: none;    
 }
 .top-header {
-padding-top: 16px;    
-padding-bottom: 16px;
 border-bottom: 1px solid #E7E9FC;
 min-width: 320px;
 }
@@ -159,15 +157,19 @@ flex-direction: column;
 align-items: flex-start;
 gap: 40px;
 padding-top: 72px; 
-padding-left: 16px;   
+
 }
 .mobil-menu-item {
 font-size: 36px;
 font-weight: 700;
 line-height: 1.11;
 letter-spacing: 0.02em;
+color: #2E2F42;
 }
-
+.menu-link {
+color: #2e2f42;
+transition: color cubic-bezier(0.4, 0, 0.2, 1) 250ms; 
+}
 .menu-link:hover,
 .menu-link:focus {
 color: #404bbf;
@@ -224,6 +226,9 @@ align-items: center;
 justify-content: center;
 transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1); /*для плавної зміни кольору фону елемента*/
 }
+.mobil-social-link {
+line-height: 0;      /*для збереження розміру іконки. за замовчуванням у насє висота рядка*/
+}
 .social-icon {
 display: flex;
 width: 100%;
@@ -242,7 +247,7 @@ background-color: #404bbf;
 .mobil-social-icon {
 fill: #f4f4fd;
 }
-/* ============= MAIN ============= */
+/* ============= MAIN for mobile ============= */
 
 .business {
 background: #2E2F42;
@@ -295,7 +300,7 @@ transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1); /*для пла
 background-color: #404bbf;
 }
 
-/* -------------- section Functions -------------- */
+/* -------------- section Functions for mobile -------------- */
 .functions {
 padding: 96px 0;
 }
@@ -318,7 +323,7 @@ color: #434455;
 margin-bottom: 72px;
 }
 
-/* -------------- section Our Team -------------- */
+/* -------------- section Our Team for mobile -------------- */
 .team {
 background-color: #F4F4FD;
 padding-top: 96px;
@@ -339,10 +344,10 @@ display: flex;
 flex-wrap: wrap;     
 gap: 72px;
 justify-content: center;
-align-items: center;
-background-color: transparent;       
+align-items: center;  
 }
 .team-list-item {
+background: #FFFFFF;
 border-radius: 0px 0px 4px 4px;
 box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08),
             0px 1px 1px 0px rgba(46, 47, 66, 0.16),
@@ -353,13 +358,20 @@ padding: 32px 0;
 }
 .team-name {
 color: #2E2F42;
-font-size: 20px; /*h3*/
-line-height: 1.2;
+font-family: Roboto;
+font-size: 20px;  /*h3*/
+font-weight: 500;
+line-height: 1.2;  /* 120% */
 letter-spacing: 0.02em;
 text-align: center;
 margin-bottom: 8px;
 }
 .team-text {
+font-family: Roboto;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5; /* 150% */
+letter-spacing: 0.02em; 
 text-align: center;
 margin-bottom: 8px;
 }
@@ -379,7 +391,7 @@ height: 40px;
 color: #F4F4FD;    
 }
 
-/* -------------- PORTFOLIO -------------- */
+/* -------------- PORTFOLIO  for mobile-------------- */
 .portfolio {
 flex-shrink: 0;         /*Значення 0 заборонить елементу стискатися*/
 background: #ffffff;
@@ -465,7 +477,7 @@ box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08),
             0px 1px 6px 0px rgba(46, 47, 66, 0.08);
 }
 
-/* -------------- FOOTER -------------- */
+/* -------------- FOOTER  for mobile-------------- */
 .footer {
 background-color: #2e2f42;
 padding: 96px 0;
@@ -495,7 +507,7 @@ letter-spacing: 0.03em;
 text-transform: uppercase;
 text-align: left;
 }
- .logotype-white {
+.logotype-white {
  color: #F4F4FD; 
  font-family: 'Raleway', sans-serif;
  font-size: 18px;
@@ -504,7 +516,7 @@ text-align: left;
  letter-spacing: 0.03em;
  text-transform: uppercase;
  display: inline-block;
- }
+}
 .footer-text {
 color: #F4F4FD;
 font-size: 16px;
@@ -558,7 +570,7 @@ background-color: #31D0AA;
 .social-icon-item {
 fill: #f4f4fd;
 }
-/*----------Footer SUBSCRIBE for tablet-----------*/
+/*----------Footer SUBSCRIBE for mobile-----------*/
 
 .footer-email-form {
 display: flex;
@@ -661,6 +673,206 @@ background-image: linear-gradient(rgba(46, 47, 66, 0.70),
                                   rgba(46, 47, 66, 0.70)), 
                                   url('../images/retina/hero-mobile@3x.jpg');
 }
+/* ----------- BACKDROP FOR MOBILE ----------- */
+.backdrop {
+  position: fixed; /*виймаємо його*/
+  top: 0;  /*притискаємо до верхнього лівого кута*/
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.40);
+  z-index: 999999; /*щоб більше ніякий фіксований елемент не перекривав backdrop*/
+  opacity: 0; /*робимо backdrop прозорим*/
+  visibility: hidden; /*робимо backdrop не відчутним до курсору миші, взагалі прихований*/
+  pointer-events: none; /*робимо backdrop не відчутним до курсору миші, взагалі прихований*/
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+  }
+  .backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+    }
+  /* ----------- MODAL WINDOW FOR TABLET ----------- */
+  .modal {
+  position: absolute;
+  top: 50%; /*вирівнюємо по центру*/
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 408px;
+  min-height: 584px;
+  flex-shrink: 0; 
+  border-radius: 4px;
+  background: #FCFCFC; 
+  padding: 24px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .modal-close-btn {
+  display: flex; /*для подальшої можливості зміни розташування дочірнього елемента*/    
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+  line-height: 0;
+  stroke: #2E2F42;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%; 
+  align-items: center; /*для вирівнювання дочірнього елемента по вертикалі*/
+  justify-content: center; /*для вирівнювання дочірнього елемента по горизонталі*/
+  background-color: #e7e9fc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .modal-close-btn:hover,
+  .modal-close-btn:focus {
+  background-color: #404bbf; 
+  fill: #ffffff;
+  border: none;
+  }
+  .modal-close-btn-icon {
+  width: 8px;   
+  height: 8px;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+  }
+  .modal-text {
+  color: #2E2F42;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5; /* 150% */
+  letter-spacing: 0.02em; 
+  width: 360px;  
+  margin-bottom: 16px;
+  }
+  /* ------------ MODAL FORM for mobile ------------ */
+  .modal {
+  padding: 72px 24px 24px 24px;    
+  }
+  .modal-section {
+  margin-bottom: 8px;
+  width: 360px;
+  }
+  .modal-section-label {
+  display: block;
+  font-family: Roboto;
+  color: #8E8F99;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.17; /* 116.667% */
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  }
+  
+  .modal-section-input {
+  width: 100%;  
+  height: 40px;  
+  /*margin-top: 4px;*/
+  border: 1px solid rgba(46, 47, 66, 0.40);
+  border-radius: 4px; 
+  padding-left: 38px;
+  background-color: transparent; /*встановлює колір фону елемента*/
+  outline: transparent; /*для встановлення стилю контуру для елемента*/
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+  }
+  .modal-section-input:focus {
+  border-color: #4d5ae5;
+  outline-color: transparent; /*робимо прозорим колір активної рамки*/ 
+  outline-offset: 2px;  
+  }
+  .modal-section-icon {
+  position: absolute;  
+  top: 50%;  
+  left: 16px;
+  fill: none;
+  transform: translateY(-50%);
+  fill: #2E2F42;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+  stroke: none;
+  }
+  .modal-section-date {
+  position: relative;
+  }
+  .modal-section-input:focus + .modal-section-icon {
+  fill: #4D5AE5;   
+  }
+  .modal-section-comment {
+  width: 100%;
+  height: 120px;
+  
+  color: rgba(46, 47, 66, 0.4);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.17; /* 116.667% */
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  border: 1px solid rgba(46, 47, 66, 0.40);
+  background-color: transparent;
+  outline: transparent;
+  resize: none; /*прибираємо кутовий повзунок*/
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 8px 16px; 
+  /*margin-top: 4px;*/    
+  }
+  .modal-section-comment::placeholder {
+  color: rgba(64, 64, 64, 0.3);    
+  }
+  .modal-section-comment:hover, .modal-section-comment:focus {
+  border-color: #4D5AE5;
+  outline-color: transparent;
+  outline-offset: 2px;    
+  }
+  .modal-section-last {
+  margin-bottom: 16px;
+  width: 360px;    
+  }
+  .modal-checkbox {
+  margin-bottom: 24px;    
+  }
+  .modal-checkbox-check {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  fill: #f4f4fd;
+  border-radius: 2px;
+  border: 1px solid rgba(46, 47, 66, 0.40);
+  cursor: pointer;
+  fill: transparent; /*приховуємо галочку - робимо її прозорою*/
+  margin-right: 8px;  
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .modal-checkbox-label {
+  color: #8E8F99;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.17; /* 116.667% */
+  letter-spacing: 0.04em;    
+  }
+  .privacy-policy-link {
+  color: #4D5AE5;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  text-decoration-line: underline;     
+  }
+  
+  .modal-checkbox-form:checked + .modal-checkbox-label .modal-checkbox-check {
+  background-color: #404bbf; 
+  fill: #F4F4FD;
+  border: none; 
+  }
+  
+  .modal-checkbox-form:focus + .modal-checkbox-label .modal-checkbox-check {
+  border:#4D5AE5;
+  border-radius: 4px;
+  outline: 2px solid rgba(0, 0, 255, 0.5);}
+
 }
     
 /* ============== TABLET STYLES ============== */ 
@@ -843,7 +1055,207 @@ flex-direction: row;
 .modal-text {
 width: 360px;  
 }
-} 
+/* ----------- BACKDROP  FOR TABLET ----------- */
+.backdrop {
+    position: fixed; /*виймаємо його*/
+    top: 0;  /*притискаємо до верхнього лівого кута*/
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.40);
+    z-index: 999999; /*щоб більше ніякий фіксований елемент не перекривав backdrop*/
+    opacity: 0; /*робимо backdrop прозорим*/
+    visibility: hidden; /*робимо backdrop не відчутним до курсору миші, взагалі прихований*/
+    pointer-events: none; /*робимо backdrop не відчутним до курсору миші, взагалі прихований*/
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+      }
+    /* ----------- MODAL WINDOW FOR TABLET ----------- */
+    .modal {
+    position: absolute;
+    top: 50%; /*вирівнюємо по центру*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 408px;
+    min-height: 584px;
+    flex-shrink: 0; 
+    border-radius: 4px;
+    background: #FCFCFC; 
+    padding: 24px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-close-btn {
+    display: flex; /*для подальшої можливості зміни розташування дочірнього елемента*/    
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    padding: 0px;
+    background-color: transparent;
+    line-height: 0;
+    stroke: #2E2F42;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%; 
+    align-items: center; /*для вирівнювання дочірнього елемента по вертикалі*/
+    justify-content: center; /*для вирівнювання дочірнього елемента по горизонталі*/
+    background-color: #e7e9fc;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .modal-close-btn:hover,
+    .modal-close-btn:focus {
+    background-color: #404bbf; 
+    fill: #ffffff;
+    border: none;
+    }
+    .modal-close-btn-icon {
+    width: 8px;   
+    height: 8px;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .modal-text {
+    color: #2E2F42;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5; /* 150% */
+    letter-spacing: 0.02em; 
+    width: 360px;  
+    margin-bottom: 16px;
+    }
+    /* ------------- MODAL FORM for tablet ------------- */
+    .modal {
+    padding: 72px 24px 24px 24px;    
+    }
+    .modal-section {
+    margin-bottom: 8px;
+    width: 360px;
+    }
+    .modal-section-label {
+    display: block;
+    font-family: Roboto;
+    color: #8E8F99;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.17; /* 116.667% */
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    }
+    
+    .modal-section-input {
+    width: 100%;  
+    height: 40px;  
+    /*margin-top: 4px;*/
+    border: 1px solid rgba(46, 47, 66, 0.40);
+    border-radius: 4px; 
+    padding-left: 38px;
+    background-color: transparent; /*встановлює колір фону елемента*/
+    outline: transparent; /*для встановлення стилю контуру для елемента*/
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .modal-section-input:focus {
+    border-color: #4d5ae5;
+    outline-color: transparent; /*робимо прозорим колір активної рамки*/ 
+    outline-offset: 2px;  
+    }
+    .modal-section-icon {
+    position: absolute;  
+    top: 50%;  
+    left: 16px;
+    fill: none;
+    transform: translateY(-50%);
+    fill: #2E2F42;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    stroke: none;
+    }
+    .modal-section-date {
+    position: relative;
+    }
+    .modal-section-input:focus + .modal-section-icon {
+    fill: #4D5AE5;   
+    }
+    .modal-section-comment {
+    width: 100%;
+    height: 120px;
+    
+    color: rgba(46, 47, 66, 0.4);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.17; /* 116.667% */
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    border: 1px solid rgba(46, 47, 66, 0.40);
+    background-color: transparent;
+    outline: transparent;
+    resize: none; /*прибираємо кутовий повзунок*/
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px 16px; 
+    /*margin-top: 4px;*/    
+    }
+    .modal-section-comment::placeholder {
+    color: rgba(64, 64, 64, 0.3);    
+    }
+    .modal-section-comment:hover, .modal-section-comment:focus {
+    border-color: #4D5AE5;
+    outline-color: transparent;
+    outline-offset: 2px;    
+    }
+    .modal-section-last {
+    margin-bottom: 16px;
+    width: 360px;    
+    }
+    .modal-checkbox {
+    margin-bottom: 24px;    
+    }
+    .modal-checkbox-check {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    fill: #f4f4fd;
+    border-radius: 2px;
+    border: 1px solid rgba(46, 47, 66, 0.40);
+    cursor: pointer;
+    fill: transparent; /*приховуємо галочку - робимо її прозорою*/
+    margin-right: 8px;  
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+                fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-checkbox-label {
+    color: #8E8F99;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.17; /* 116.667% */
+    letter-spacing: 0.04em;    
+    }
+    .privacy-policy-link {
+    color: #4D5AE5;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.33;
+    letter-spacing: 0.04em;
+    text-decoration-line: underline;     
+    }
+    
+    .modal-checkbox-form:checked + .modal-checkbox-label .modal-checkbox-check {
+    background-color: #404bbf; 
+    fill: #F4F4FD;
+    border: none; 
+    }
+    
+    .modal-checkbox-form:focus + .modal-checkbox-label .modal-checkbox-check {
+    border:#4D5AE5;
+    border-radius: 4px;
+    outline: 2px solid rgba(0, 0, 255, 0.5);}
+  }
+ 
 /* ============== MEDIA FOR DESCTOP STYLES ============== */
 @media screen and (min-width: 1158px) {
 .container {
@@ -974,10 +1386,8 @@ display: flex;
 align-items: flex-start;
 }
 .footer-email-form {
-
 flex-direction: row;
 }
-
 .footer-social-list {
 display: flex;
 justify-content: center;
@@ -1013,203 +1423,4 @@ list-style-type: none;
   .subscribe-btn {
   display: flex;
   width: 165px; }/*для подальшої можливості зміни розташування дочірніх елементів*/
-
-/* ============= BACKDROP ============= */
-.backdrop {
-    position: fixed; /*виймаємо його*/
-    top: 0;  /*притискаємо до верхнього лівого кута*/
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(46, 47, 66, 0.40);
-    z-index: 999999; /*щоб більше ніякий фіксований елемент не перекривав backdrop*/
-    opacity: 0; /*робимо backdrop прозорим*/
-    visibility: hidden; /*робимо backdrop не відчутним до курсору миші, взагалі прихований*/
-    pointer-events: none; /*робимо backdrop не відчутним до курсору миші, взагалі прихований*/
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1); 
-    }
-    .backdrop.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-      }
-    /* ============= MODAL WINDOW ============= */
-    .modal {
-    position: absolute;
-    top: 50%; /*вирівнюємо по центру*/
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 408px;
-    min-height: 584px;
-    flex-shrink: 0; 
-    border-radius: 4px;
-    background: #FCFCFC; 
-    padding: 24px;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .modal-close-btn {
-    display: flex; /*для подальшої можливості зміни розташування дочірнього елемента*/    
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 24px;
-    height: 24px;
-    border: none;
-    padding: 0px;
-    background-color: transparent;
-    line-height: 0;
-    stroke: #2E2F42;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 50%; 
-    align-items: center; /*для вирівнювання дочірнього елемента по вертикалі*/
-    justify-content: center; /*для вирівнювання дочірнього елемента по горизонталі*/
-    background-color: #e7e9fc;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    .modal-close-btn:hover,
-    .modal-close-btn:focus {
-    background-color: #404bbf; 
-    fill: #ffffff;
-    border: none;
-    }
-    .modal-close-btn-icon {
-    width: 8px;   
-    height: 8px;
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1); 
-    }
-    .modal-text {
-    color: #2E2F42;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5; /* 150% */
-    letter-spacing: 0.02em; 
-    width: 360px;  
-    margin-bottom: 16px;
-    }
-    /* ============= MODAL FORM ============= */
-    .modal {
-    padding: 72px 24px 24px 24px;    
-    }
-    .modal-section {
-    margin-bottom: 8px;
-    width: 360px;
-    }
-    .modal-section-label {
-    display: block;
-    font-family: Roboto;
-    color: #8E8F99;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.17; /* 116.667% */
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
-    }
-    
-    .modal-section-input {
-    width: 100%;  
-    height: 40px;  
-    /*margin-top: 4px;*/
-    border: 1px solid rgba(46, 47, 66, 0.40);
-    border-radius: 4px; 
-    padding-left: 38px;
-    background-color: transparent; /*встановлює колір фону елемента*/
-    outline: transparent; /*для встановлення стилю контуру для елемента*/
-    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1); 
-    }
-    .modal-section-input:focus {
-    border-color: #4d5ae5;
-    outline-color: transparent; /*робимо прозорим колір активної рамки*/ 
-    outline-offset: 2px;  
-    }
-    .modal-section-icon {
-    position: absolute;  
-    top: 50%;  
-    left: 16px;
-    fill: none;
-    transform: translateY(-50%);
-    fill: #2E2F42;
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1); 
-    stroke: none;
-    }
-    .modal-section-date {
-    position: relative;
-    }
-    .modal-section-input:focus + .modal-section-icon {
-    fill: #4D5AE5;   
-    }
-    .modal-section-comment {
-    width: 100%;
-    height: 120px;
-    
-    color: rgba(46, 47, 66, 0.4);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.17; /* 116.667% */
-    letter-spacing: 0.04em;
-    border-radius: 4px;
-    border: 1px solid rgba(46, 47, 66, 0.40);
-    background-color: transparent;
-    outline: transparent;
-    resize: none; /*прибираємо кутовий повзунок*/
-    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 8px 16px; 
-    /*margin-top: 4px;*/    
-    }
-    .modal-section-comment::placeholder {
-    color: rgba(64, 64, 64, 0.3);    
-    }
-    .modal-section-comment:hover, .modal-section-comment:focus {
-    border-color: #4D5AE5;
-    outline-color: transparent;
-    outline-offset: 2px;    
-    }
-    .modal-section-last {
-    margin-bottom: 16px;
-    width: 360px;    
-    }
-    .modal-checkbox {
-    margin-bottom: 24px;    
-    }
-    .modal-checkbox-check {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 16px;
-    height: 16px;
-    fill: #f4f4fd;
-    border-radius: 2px;
-    border: 1px solid rgba(46, 47, 66, 0.40);
-    cursor: pointer;
-    fill: transparent; /*приховуємо галочку - робимо її прозорою*/
-    margin-right: 8px;  
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1), 
-                fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .modal-checkbox-label {
-    color: #8E8F99;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.17; /* 116.667% */
-    letter-spacing: 0.04em;    
-    }
-    .privacy-policy-link {
-    color: #4D5AE5;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.33;
-    letter-spacing: 0.04em;
-    text-decoration-line: underline;     
-    }
-    
-    .modal-checkbox-form:checked + .modal-checkbox-label .modal-checkbox-check {
-    background-color: #404bbf; 
-    fill: #F4F4FD;
-    border: none; 
-    }
-    
-    .modal-checkbox-form:focus + .modal-checkbox-label .modal-checkbox-check {
-    border:#4D5AE5;
-    border-radius: 4px;
-    outline: 2px solid rgba(0, 0, 255, 0.5);}}
+  }
